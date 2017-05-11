@@ -27,11 +27,13 @@ Route::get('/', function () {
 // });
 
 
-Route::group(['prefix' => 'api'], function () {
+Route::group(['prefix' => 'api','middleware'=>'api.auth'], function () {
     Route::get('/login', 'ApiUserController@login');
-    Route::post('/authenticate', 'ApiUserController@authenticate');
-    Route::get('/authenticate/user', 'ApiUserController@getAuthenticatedUser');
+    
+
+    Route::get('/outlet', 'OutletController@getList');
 });
+
 
 
 Route::group(['middleware'=>'web'], function (){
