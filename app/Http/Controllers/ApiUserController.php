@@ -37,8 +37,13 @@ class ApiUserController extends Controller
 		    }
     	}elseif($request->has('token_user')) {
 
-    		$dataUser = Token::with('user')->where('token', $request->token_user)->first();
-    		return $dataUser;
+    		$dbToken = Token::with('user')->where('token', $request->token_user)->first();
+    		if($dbToken) {
+    			$saveToken = Token::find($dbToken->id);
+		        $saveToken->logged_at = date('Y-m-d H:i:s');
+		        $saveToken->save();
+    		}
+    		return $dbToken;
 
     	}else{
     		return response()->json(['error'=> 'Salah URL']);
