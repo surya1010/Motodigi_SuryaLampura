@@ -11,10 +11,37 @@
 |
 */
 
+
+
 Route::get('/', function () {
     return view('welcome');
 });
 
-Route::auth();
 
-Route::get('/home', 'HomeController@index');
+// Route::group(['prefix'=>'api','middleware'=>'auth:api'], function(){
+ 
+//    Route::get('/login', [
+//    		'uses' => 'ApiUserController@login'
+//    ]);
+ 
+// });
+
+
+Route::group(['prefix' => 'api'], function () {
+    Route::get('/login', 'ApiUserController@login');
+    Route::post('/authenticate', 'ApiUserController@authenticate');
+    Route::get('/authenticate/user', 'ApiUserController@getAuthenticatedUser');
+});
+
+
+Route::group(['middleware'=>'web'], function (){
+ 
+   Route::auth();
+ 
+   Route::get('/home', 'HomeController@index');
+ 
+});
+
+// Route::auth();
+
+// Route::get('/home', 'HomeController@index');

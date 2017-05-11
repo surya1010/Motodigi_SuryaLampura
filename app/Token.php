@@ -17,4 +17,8 @@ class Token extends Model
     protected $hidden = [
         'token'
     ];
+
+    public function user() {
+    	return $this->hasOne('App\User', 'id', 'users_id');
+    }
 }
