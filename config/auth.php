@@ -45,6 +45,11 @@ return [
             'driver' => 'token',
             'provider' => 'users',
         ],
+
+        'myApi' => [
+            'driver' => 'mytoken',
+            'provider' => 'token',
+        ],
     ],
 
     /*
@@ -67,6 +72,11 @@ return [
     'providers' => [
         'users' => [
             'driver' => 'eloquent',
+            'model' => App\User::class,
+        ],
+
+        'token' => [
+            'driver' => 'externalauthapi',
             'model' => App\User::class,
         ],
 

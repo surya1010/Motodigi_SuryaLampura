@@ -14,9 +14,9 @@ class Token extends Model
 		'users_id','token','token_generated','token_expired'
 	];
 
-    protected $hidden = [
-        'token'
-    ];
+    // protected $hidden = [
+    //     'token'
+    // ];
 
     public function user() {
     	return $this->hasOne('App\User', 'id', 'users_id');

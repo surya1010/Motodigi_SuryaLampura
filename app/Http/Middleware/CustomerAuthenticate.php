@@ -5,7 +5,7 @@ namespace App\Http\Middleware;
 use Closure;
 use Illuminate\Support\Facades\Auth;
 
-class ApiAuthenticate
+class CustomerAuthenticate
 {
     /**
      * Handle an incoming request.
@@ -17,12 +17,11 @@ class ApiAuthenticate
      */
     public function handle($request, Closure $next)
     {
-        //dd(auth()->guard('myApi'));
-        $auth = auth()->guard('myApi');
- 
-        if ($auth->check()) {
+        $user = Auth::user();
+        
+        if ($user->user_type=="Customer") {
             return $next($request);
-        };
+        }
      
         abort(403, "You're not authorized to access this public REST API.");
     }

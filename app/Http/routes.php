@@ -18,20 +18,19 @@ Route::get('/', function () {
 });
 
 
-// Route::group(['prefix'=>'api','middleware'=>'auth:api'], function(){
- 
-//    Route::get('/login', [
-//    		'uses' => 'ApiUserController@login'
-//    ]);
- 
-// });
+$options = [
+    'prefix' => 'api', 
+    //'middleware' => 'auth:api'
+];
 
-
-Route::group(['prefix' => 'api','middleware'=>'api.auth'], function () {
-    Route::get('/login', 'ApiUserController@login');
+Route::group($options, function () {
+    Route::post('/login', 'ApiUserController@login');
     
 
-    Route::get('/outlet', 'OutletController@getList');
+    Route::get('/outlet', [
+    	'middleware' => 'customer.auth',
+    	'uses'	=>	'OutletController@getList'
+    ]);
 });
 
 

@@ -1,12 +1,16 @@
 <?php
 
 namespace App;
+use Illuminate\Auth\Authenticatable;
+ use Illuminate\Database\Eloquent\Model;
 
-use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
 
-class User extends Authenticatable
+//use Illuminate\Foundation\Auth\User as Authenticatable;
+
+class User extends Model implements AuthenticatableContract
 {
-
+    use Authenticatable;
     protected $table = 'users';
     /**
      * The attributes that are mass assignable.
@@ -28,5 +32,9 @@ class User extends Authenticatable
 
     public function token() {
         return $this->belongsTo('App\Token');
+    }
+
+    public function outlet() {
+        return $this->hasMany('App\Outlet', 'users_id', 'id');
     }
 }

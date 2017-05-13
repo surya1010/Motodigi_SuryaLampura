@@ -12,12 +12,10 @@ use App\Token;
 class ApiUserController extends Controller
 {
 	
-
     public function login(Request $request) {
 
-    	if($request->has('email')) {
-
-    		$credentials = array('email' => $request->input('email'), 'password' => $request->input('password'));
+    		//dd($request->email);
+    		$credentials = array('email' => $request->email, 'password' => $request->password);
 
 	    	if(Auth::attempt($credentials)){
 		    
@@ -30,24 +28,9 @@ class ApiUserController extends Controller
 
 		        $dataUser = Token::with('user')->where('token', $saveToken->token)->first();
 
-		        return $dataUser;
+		        return response()->json($dataUser);
 		    
-		    }else{
-		    	return response()->json(['error'=>'Salah']);
 		    }
-    	}elseif($request->has('token_user')) {
-
-    		$dbToken = Token::with('user')->where('token', $request->token_user)->first();
-    		if($dbToken) {
-    			$saveToken = Token::find($dbToken->id);
-		        $saveToken->logged_at = date('Y-m-d H:i:s');
-		        $saveToken->save();
-    		}
-    		return $dbToken;
-
-    	}else{
-    		return response()->json(['error'=> 'Salah URL']);
-    	}
 
     	
 	    
