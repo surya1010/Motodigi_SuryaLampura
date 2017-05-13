@@ -31,6 +31,16 @@ Route::group($options, function () {
     	'middleware' => 'customer.auth',
     	'uses'	=>	'OutletController@getList'
     ]);
+
+    Route::get('/product/{outlet_id}', [
+    	'middleware' => 'customer.auth',
+    	'uses'	=>	'ProductController@getProductBaseOutletId'
+    ]);
+
+    Route::post('/transaksi/store', [
+    	'middleware' => 'customer.auth',
+    	'uses'	=>	'TransaksiController@store'
+    ]);
 });
 
 
@@ -41,6 +51,7 @@ Route::group(['middleware'=>'web'], function (){
  
    Route::get('/home', 'HomeController@index');
  
+   Route::get('/transaksi', 'TransaksiController@index');
 });
 
 // Route::auth();

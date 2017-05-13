@@ -14,7 +14,7 @@ class ApiUserController extends Controller
 	
     public function login(Request $request) {
 
-    		//dd($request->email);
+    		
     		$credentials = array('email' => $request->email, 'password' => $request->password);
 
 	    	if(Auth::attempt($credentials)){

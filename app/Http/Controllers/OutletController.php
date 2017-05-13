@@ -8,6 +8,7 @@ use App\Http\Requests;
 use Auth;
 use App\User;
 use App\Outlet;
+use App\Product;
 
 class OutletController extends Controller
 {
@@ -21,4 +22,5 @@ class OutletController extends Controller
     		return $dbOutlet;
     	}
     }
+
 }

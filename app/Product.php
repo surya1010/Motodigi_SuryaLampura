@@ -11,4 +11,11 @@ class Product extends Model
     protected $fillable = [
     	'name', 'description', 'price', 'category', 'outlet_id'
     ];
+
+
+
+
+    public function outlet() {
+    	return $this->belongsTo('App\Outlet');
+    }
 }
